@@ -4,7 +4,7 @@
     session="true" %>
 <%
     String user = (String) session.getAttribute("username");
-    String role = (String) session.getAttribute("role");  // "admin", "employee" or null (customer)
+    String role = (String) session.getAttribute("role");  // "admin", "employee", or null (customer)
     if (user == null) {
         String loginPage = "login.jsp";
         if ("admin".equals(role)) {
@@ -15,15 +15,38 @@
         response.sendRedirect(loginPage);
         return;
     }
+
+    String portal = "customerPortal.jsp";
+    if ("admin".equals(role)) {
+        portal = "adminPortal.jsp";
+    } else if ("employee".equals(role)) {
+        portal = "servicerepPortal.jsp";
+    }
 %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="US-ASCII">
     <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        form {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <p>Welcome <b><%= user %></b> (<%= role == null ? "customer" : role %>)</p>
-    <a href="logout.jsp">Logout</a>
+
+    <form action="<%= portal %>" method="get">
+        <input type="submit" value="Continue to Portal">
+    </form>
+
+    <form action="logout.jsp" method="post">
+        <input type="submit" value="Logout">
+    </form>
 </body>
 </html>
