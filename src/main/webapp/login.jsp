@@ -34,10 +34,12 @@
       }
       msg = "Invalid credentials";
 
-      rs.close(); ps.close(); db.closeConnection(con);
+      rs.close(); 
+      ps.close(); 
+      db.closeConnection(con);
     } catch (Exception ex) {
       out.print(ex);
-      msg = " login failed";
+      msg = "Login failed";
     }
   }
 %>
@@ -45,11 +47,13 @@
 <h2>Login: Customers</h2>
 <form action="login.jsp" method="post">
   <label>Username:</label><br>
-  <input type="text" name="username"><br>
+  <input type="text" name="username" required><br>
   <label>Password:</label><br>
-  <input type="password" name="password"><br>
+  <input type="password" name="password" required><br>
   <input type="submit" value="Login">
+  <input type="button" value="Register"
+         onclick="window.location.href='registerCustomer.jsp';">
 </form>
-<p style="color:red"><%= msg %></p>
+<p style="color:red;"><%= msg %></p>
 </body>
 </html>
