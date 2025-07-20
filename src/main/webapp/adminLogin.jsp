@@ -29,7 +29,7 @@
         session.setAttribute("username", u);
         session.setAttribute("ssn", rs.getString("ssn"));
         session.setAttribute("role", "admin");
-        response.sendRedirect("adminWelcome.jsp");
+        response.sendRedirect("welcome.jsp");
         return;
       }
       msg = "Invalid credentials";

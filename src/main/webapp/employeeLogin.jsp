@@ -29,7 +29,7 @@
         session.setAttribute("username", u);
         session.setAttribute("ssn", rs.getString("ssn"));
         session.setAttribute("role", "employee");
-        response.sendRedirect("serviceRepView.jsp");
+        response.sendRedirect("welcome.jsp");
         return;
       }
       msg = "Invalid credentials";
@@ -45,7 +45,7 @@
 %>
 
 <h2>Login: Service Rep</h2>
-<form action="serviceRepLogin.jsp" method="post">
+<form action="employeeLogin.jsp" method="post">
   <label>Username:</label><br>
   <input type="text" name="username"><br>
   <label>Password:</label><br>

@@ -72,7 +72,7 @@
 
 <h2>Search Questions</h2>
 <small>Leave blank to see all answers</small><br>
-<form action="searchQuestions.jsp" method="get">
+<form action="searchQuestion.jsp" method="get">
     <input type="text" name="keyword">
     <input type="submit" value="Search">
 </form>

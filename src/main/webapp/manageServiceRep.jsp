@@ -31,6 +31,8 @@
     } else if ("update".equals(action)) {
         String repUsername = request.getParameter("repUsername");
         String password = request.getParameter("repPassword");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
 
         try {
             PreparedStatement check = con.prepareStatement("SELECT * FROM Employees WHERE ssn = ?");
@@ -39,21 +41,25 @@
 
             if (rs.next()) {
                 PreparedStatement update = con.prepareStatement(
-                    "UPDATE Employees SET username=?, employee_password=? WHERE ssn=?"
+                    "UPDATE Employees SET username=?, employee_password=?, first_name=?, last_name=? WHERE ssn=?"
                 );
                 update.setString(1, repUsername);
                 update.setString(2, password);
-                update.setString(3, ssn);
+                update.setString(3, firstName);
+                update.setString(4, lastName);
+                update.setString(5, ssn);
                 update.executeUpdate();
                 update.close();
                 msg = "Rep updated.";
             } else {
                 PreparedStatement insert = con.prepareStatement(
-                    "INSERT INTO Employees (ssn, username, employee_password) VALUES (?, ?, ?)"
+                    "INSERT INTO Employees (ssn, username, employee_password, first_name, last_name) VALUES (?, ?, ?, ?, ?)"
                 );
                 insert.setString(1, ssn);
                 insert.setString(2, repUsername);
                 insert.setString(3, password);
+                insert.setString(4, firstName);
+                insert.setString(5, lastName);
                 insert.executeUpdate();
                 insert.close();
                 msg = "New rep created.";
@@ -79,6 +85,8 @@
         SSN: <input type="text" name="ssn" required><br>
         Username: <input type="text" name="repUsername" required><br>
         Password: <input type="text" name="repPassword" required><br>
+        First Name: <input type="text" name="firstName" required><br>
+        Last Name: <input type="text" name="lastName" required><br>
         <input type="hidden" name="action" value="update">
         <input type="submit" value="Add / Update Rep">
     </form>
@@ -95,4 +103,3 @@
     </form>
 </body>
 </html>
-

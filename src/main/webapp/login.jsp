@@ -29,6 +29,7 @@
 
       if (rs.next() && rs.getInt(1) == 1) {
         session.setAttribute("username", u);
+        session.setAttribute("role", "customer"); // added this line
         response.sendRedirect("welcome.jsp");
         return;
       }
